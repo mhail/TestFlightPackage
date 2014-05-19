@@ -70,7 +70,7 @@ Target "BuildTouchBinding" (fun _->
 
 )
 
-let version = "3.0.0"
+let version = "3.0.2.0"
 
 Target "CreateNugetPackage" (fun _ ->
     let libDir = packageDir @@ "lib"
