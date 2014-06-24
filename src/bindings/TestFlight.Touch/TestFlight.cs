@@ -25,10 +25,12 @@ namespace TestFlight.Touch
 			// http://stackoverflow.com/questions/14499334/how-to-prevent-ios-crash-reporters-from-crashing-monotouch-apps
 			IntPtr sigbus = Marshal.AllocHGlobal (512);
 			IntPtr sigsegv = Marshal.AllocHGlobal (512);
+			IntPtr sigpipe = Marshal.AllocHGlobal (512);
 
 			// Store Mono SIGSEGV and SIGBUS handlers
 			sigaction (Signal.SIGBUS, IntPtr.Zero, sigbus);
 			sigaction (Signal.SIGSEGV, IntPtr.Zero, sigsegv);
+			sigaction (Signal.SIGPIPE, IntPtr.Zero, sigpipe);
 
 			// Enable crash reporting libraries
 
@@ -37,10 +39,11 @@ namespace TestFlight.Touch
 			// Restore Mono SIGSEGV and SIGBUS handlers            
 			sigaction (Signal.SIGBUS, sigbus, IntPtr.Zero);
 			sigaction (Signal.SIGSEGV, sigsegv, IntPtr.Zero);
+			sigaction (Signal.SIGPIPE, sigpipe, IntPtr.Zero);
 
 			Marshal.FreeHGlobal (sigbus);
 			Marshal.FreeHGlobal (sigsegv);
-
+			Marshal.FreeHGlobal (sigpipe);
 		}
 
 		[DllImport ("libc")]
